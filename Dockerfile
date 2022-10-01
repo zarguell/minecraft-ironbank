@@ -7,7 +7,7 @@ FROM itzg/minecraft-server:latest as builder
 
 FROM ${BASE_REGISTRY}/${BASE_IMAGE}:${BASE_TAG}
 
-RUN dnf install -y java-17-openjdk-headless freetype fontconfig dejavu-sans-fonts && \
+RUN dnf install -y java-17-openjdk-headless freetype fontconfig dejavu-sans-fonts dos2unix && \
     dnf -y upgrade && \
     dnf clean all && \
     rm -rf /var/cache/dnf
