@@ -1,0 +1,30 @@
+apiVersion: v1
+
+name: itzg/minecraft-server
+
+tags:
+- latest
+
+args:
+  BASE_IMAGE: redhat/ubi/ubi8
+  BASE_TAG: '8.6'
+
+labels:
+  org.opencontainers.image.title: minecraft-server
+  org.opencontainers.image.description: Minecraft server with select-able version 
+  org.opencontainers.image.licenses: Apache 2-0
+  org.opencontainers.image.url: https://github.com/itzg/docker-minecraft-server
+  org.opencontainers.image.vendor: opensource
+  org.opencontainers.image.version: latest
+  mil.dso.ironbank.image.keywords: minecraft,openjdk,jdk,Red Hat,Java
+  mil.dso.ironbank.image.type: opensource
+  mil.dso.ironbank.product.name: minecraft-server
+
+resources:
+- tag: itzg/minecraft-server
+  url: docker://itzg/minecraft-server
+
+maintainers:
+- email: ironbank@dsop.io
+  username: zarguell
+  cht_member: false
