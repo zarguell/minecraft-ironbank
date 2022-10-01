@@ -20,12 +20,12 @@ RUN groupadd -g 1000 minecraft \
 && useradd -m -u 1000 -g minecraft minecraft
 USER minecraft
 
-COPY --from=builder --chmod=755 /start* /
-COPY --from=builder --chmod=755 /usr/local/bin/* /usr/local/bin/
-COPY --from=builder --chmod=755 /usr/sbin/gosu /usr/local/bin
-COPY --from=builder --chmod=755 /health.sh /health.sh
-COPY --from=builder --chmod=644 /image/log4j2.xml /image/log4j2.xml
-COPY --from=builder --chmod=755 /auto /auto
+COPY --from=builder --chown=minecraft:minecraft --chmod=755 /start* /
+COPY --from=builder --chown=minecraft:minecraft --chmod=755 /usr/local/bin/* /usr/local/bin/
+COPY --from=builder --chown=minecraft:minecraft --chmod=755 /usr/sbin/gosu /usr/local/bin
+COPY --from=builder --chown=minecraft:minecraft --chmod=755 /health.sh /health.sh
+COPY --from=builder --chown=minecraft:minecraft --chmod=644 /image/log4j2.xml /image/log4j2.xml
+COPY --from=builder --chown=minecraft:minecraft --chmod=755 /auto /auto
 
 RUN dos2unix /start* /auto/*
 
