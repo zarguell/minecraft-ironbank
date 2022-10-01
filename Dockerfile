@@ -17,6 +17,7 @@ RUN dnf install -y java-17-openjdk-headless freetype fontconfig dejavu-sans-font
 ENV LANG C.UTF-8
 ENV JAVA_HOME /usr/lib/jvm/jre-17-openjdk
 ENV PATH $JAVA_HOME/bin:$PATH
+ENV TYPE=VANILLA VERSION=LATEST EULA="" UID=1000 GID=1000 RCON_PASSWORD=minecraft
 
 COPY --from=builder --chown=1000:1000 --chmod=755 /start* /
 COPY --from=builder --chown=1000:1000 --chmod=755 /usr/local/bin/* /usr/local/bin/
@@ -25,9 +26,9 @@ COPY --from=builder --chown=1000:1000 --chmod=755 /health.sh /health.sh
 COPY --from=builder --chown=1000:1000 --chmod=644 /image/log4j2.xml /image/log4j2.xml
 COPY --from=builder --chown=1000:1000 --chmod=755 /auto /auto
 
-RUN groupadd -g 1000 minecraft \
-&& useradd -m -u 1000 -g minecraft minecraft
-USER minecraft
+# RUN groupadd -g 1000 minecraft \
+# && useradd -m -u 1000 -g minecraft minecraft
+USER 1000
 
 RUN dos2unix /start* /auto/*
 
