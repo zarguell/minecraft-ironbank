@@ -25,6 +25,7 @@ WORKDIR /data
 STOPSIGNAL SIGTERM
 
 COPY --from=builder --chmod=755 /start* /
+COPY --from=builder --chmod=755 /data /data
 COPY --from=builder --chmod=755 /usr/local/bin/* /usr/local/bin/
 COPY --from=builder --chmod=755 /usr/sbin/gosu /usr/local/bin
 COPY --from=builder --chmod=755 /health.sh /health.sh
@@ -38,8 +39,8 @@ COPY --from=builder --chmod=755 /auto /auto
 #     chown -R 1000:1000 /auto && \
 
 
-# # RUN groupadd -g 1000 minecraft \
-# # && useradd -m -u 1000 -g minecraft minecraft
+RUN groupadd -g 1000 minecraft \
+&& useradd -m -u 1000 -g minecraft minecraft
 # USER 1000
 
 RUN dos2unix /start* /auto/*
