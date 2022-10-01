@@ -24,16 +24,23 @@ WORKDIR /data
 
 STOPSIGNAL SIGTERM
 
-COPY --from=builder --chown=1000:1000 --chmod=755 /start* /
-COPY --from=builder --chown=1000:1000 --chmod=755 /usr/local/bin/* /usr/local/bin/
-COPY --from=builder --chown=1000:1000 --chmod=755 /usr/sbin/gosu /usr/local/bin
-COPY --from=builder --chown=1000:1000 --chmod=755 /health.sh /health.sh
-COPY --from=builder --chown=1000:1000 --chmod=644 /image/log4j2.xml /image/log4j2.xml
-COPY --from=builder --chown=1000:1000 --chmod=755 /auto /auto
+COPY --from=builder --chmod=755 /start* /
+COPY --from=builder --chmod=755 /usr/local/bin/* /usr/local/bin/
+COPY --from=builder --chmod=755 /usr/sbin/gosu /usr/local/bin
+COPY --from=builder --chmod=755 /health.sh /health.sh
+COPY --from=builder --chmod=644 /image/log4j2.xml /image/log4j2.xml
+COPY --from=builder --chmod=755 /auto /auto
 
-# RUN groupadd -g 1000 minecraft \
-# && useradd -m -u 1000 -g minecraft minecraft
-USER 1000
+# RUN chown -R 1000:1000 /start* && \
+#     chown -R 1000:1000 /usr/local/bin/ && \
+#     chown -R 1000:1000 /health.sh && \
+#     chown -R 1000:1000 /image/log4j2.xml && \
+#     chown -R 1000:1000 /auto && \
+
+
+# # RUN groupadd -g 1000 minecraft \
+# # && useradd -m -u 1000 -g minecraft minecraft
+# USER 1000
 
 RUN dos2unix /start* /auto/*
 
