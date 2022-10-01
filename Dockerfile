@@ -1,6 +1,6 @@
-ARG BASE_REGISTRY=registry1.dso.mil
-ARG BASE_IMAGE=ironbank/redhat/ubi/ubi8
-ARG BASE_TAG=8.6
+ARG BASE_REGISTRY=registry.hub.docker.com
+ARG BASE_IMAGE=zarguell/ubi8
+ARG BASE_TAG=latest
 
 # FROM statement must reference the base image using the three ARGs established
 FROM itzg/minecraft-server:latest as builder
